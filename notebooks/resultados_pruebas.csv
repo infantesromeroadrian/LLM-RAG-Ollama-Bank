@@ -1,0 +1,31 @@
+timestamp,question,answer,source,source_content
+2024-07-19T23:59:17.530751,¿Cuántos clientes únicos tenemos en el banco según nuestra data en el CSV?,"Según el resumen del CSV, tenemos 10,000 clientes únicos.",CSV_summary,"
+        RESUMEN IMPORTANTE DEL CSV 'BankCustomerChurnPrediction.csv':
+        - Total de filas y clientes únicos: 10000
+        - Número exacto de clientes únicos: 10000
+        - Columnas: customer_"
+2024-07-19T23:59:25.521417,¿Cuál es el saldo promedio de los clientes?,El saldo promedio es 76485.89.,CSV_summary,"
+        RESUMEN IMPORTANTE DEL CSV 'BankCustomerChurnPrediction.csv':
+        - Total de filas y clientes únicos: 10000
+        - Número exacto de clientes únicos: 10000
+        - Columnas: customer_"
+2024-07-19T23:59:32.785988,¿Cuántos países están representados en nuestros datos de clientes?,"Tres países están representados en nuestros datos de clientes: France, Spain y Germany.",CSV_summary,"
+        RESUMEN IMPORTANTE DEL CSV 'BankCustomerChurnPrediction.csv':
+        - Total de filas y clientes únicos: 10000
+        - Número exacto de clientes únicos: 10000
+        - Columnas: customer_"
+2024-07-19T23:59:41.464013,¿Cuál es la tasa de abandono de clientes?,20.37%,CSV_summary,"
+        RESUMEN IMPORTANTE DEL CSV 'BankCustomerChurnPrediction.csv':
+        - Total de filas y clientes únicos: 10000
+        - Número exacto de clientes únicos: 10000
+        - Columnas: customer_"
+2024-07-19T23:59:50.448387,¿Cuál es el rango de edades de nuestros clientes?,El rango de edades de nuestros clientes es de 18 a 92 años.,CSV_summary,"
+        RESUMEN IMPORTANTE DEL CSV 'BankCustomerChurnPrediction.csv':
+        - Total de filas y clientes únicos: 10000
+        - Número exacto de clientes únicos: 10000
+        - Columnas: customer_"
+2024-07-19T23:59:51.923916,¿Qué porcentaje de clientes tiene tarjeta de crédito?,70.55%,CSV_summary,"
+        RESUMEN IMPORTANTE DEL CSV 'BankCustomerChurnPrediction.csv':
+        - Total de filas y clientes únicos: 10000
+        - Número exacto de clientes únicos: 10000
+        - Columnas: customer_"
