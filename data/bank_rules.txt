@@ -1,0 +1,87 @@
+Normativas del Banco Universal S.A.
+
+1. Apertura de Cuentas
+1.1. Requisitos Generales
+- Para abrir una cuenta, el cliente debe presentar una identificación válida y vigente.
+- Se requiere un depósito inicial mínimo de 100 euros para cuentas de ahorro y 500 euros para cuentas corrientes.
+- Los menores de edad pueden abrir cuentas con la autorización de un tutor legal.
+
+1.2. Tipos de Cuentas
+- Cuenta de Ahorro: Tasa de interés anual del 0.5% al 1.5%, según el saldo.
+- Cuenta Corriente: Sin intereses, con opción de sobregiro previa aprobación.
+- Cuenta Nómina: Sin comisiones de mantenimiento si se recibe un ingreso mensual mínimo de 1000 euros.
+
+2. Préstamos y Créditos
+2.1. Préstamos Personales
+- Monto máximo: hasta 50,000 euros.
+- Plazo: de 1 a 7 años.
+- Tasa de interés: desde 5% hasta 12% anual, según perfil crediticio.
+
+2.2. Hipotecas
+- Financiamiento de hasta el 80% del valor de tasación de la propiedad.
+- Plazo máximo de 30 años.
+- Tasa de interés: fija o variable, con referencia Euribor + margen.
+
+2.3. Tarjetas de Crédito
+- Límite de crédito basado en la evaluación crediticia del cliente.
+- Tasa de interés anual: 18% para compras, 24% para retiros de efectivo.
+- Período de gracia de hasta 45 días para compras.
+
+3. Seguridad y Protección de Datos
+3.1. Protección de Información Personal
+- Todos los datos de los clientes se manejan conforme al Reglamento General de Protección de Datos (RGPD).
+- Se utiliza encriptación de extremo a extremo para todas las transacciones en línea.
+
+3.2. Prevención de Fraudes
+- Sistema de monitoreo 24/7 para detectar actividades sospechosas.
+- Notificaciones automáticas al cliente por transacciones inusuales.
+- Bloqueo temporal de cuentas ante intentos de acceso no autorizado.
+
+4. Atención al Cliente
+4.1. Canales de Atención
+- Sucursales físicas: Horario de atención de lunes a viernes de 8:30 a 14:00.
+- Banca telefónica: Disponible 24/7 para consultas y operaciones básicas.
+- Banca en línea y aplicación móvil: Acceso 24/7 a todas las funcionalidades.
+
+4.2. Gestión de Reclamaciones
+- Plazo máximo de respuesta a reclamaciones: 15 días hábiles.
+- Defensor del Cliente: Instancia independiente para resolver disputas.
+
+5. Comisiones y Cargos
+5.1. Transferencias
+- Transferencias nacionales en línea: Sin costo.
+- Transferencias internacionales: 0.4% del monto, mínimo 15 euros.
+
+5.2. Mantenimiento de Cuenta
+- Cuenta de Ahorro: Sin comisión si se mantiene un saldo promedio mensual de 1000 euros.
+- Cuenta Corriente: 5 euros mensuales, exenta si se cumplen ciertos requisitos.
+
+6. Políticas de Inversión
+6.1. Fondos de Inversión
+- Amplia gama de fondos disponibles, con diferentes perfiles de riesgo.
+- Inversión mínima: 500 euros.
+- Comisión de gestión: varía entre 0.5% y 2% anual, según el fondo.
+
+6.2. Depósitos a Plazo Fijo
+- Plazos disponibles: 3, 6, 12 y 24 meses.
+- Tasa de interés: hasta 2% anual, dependiendo del plazo y monto.
+
+7. Normativa de Prevención de Blanqueo de Capitales
+7.1. Identificación de Clientes
+- Obligatorio proceso de "Conozca a su Cliente" para todas las cuentas nuevas.
+- Actualización periódica de la información del cliente cada 2 años.
+
+7.2. Reporte de Operaciones Sospechosas
+- Monitoreo continuo de transacciones para detectar patrones inusuales.
+- Reporte obligatorio a las autoridades de cualquier actividad sospechosa.
+
+8. Cierre de Cuentas
+8.1. Por Iniciativa del Cliente
+- Sin costo si la cuenta tiene más de 6 meses de antigüedad.
+- Plazo máximo de cierre: 5 días hábiles tras la solicitud.
+
+8.2. Por Iniciativa del Banco
+- El banco se reserva el derecho de cerrar cuentas con 2 meses de preaviso.
+- Cierre inmediato en casos de uso fraudulento o ilegal de la cuenta.
+
+Estas normativas están sujetas a cambios. Para más información, consulte con nuestro personal en sucursal o visite nuestra página web oficial.
