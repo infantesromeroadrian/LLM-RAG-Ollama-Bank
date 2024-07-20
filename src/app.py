@@ -50,8 +50,8 @@ class StreamlitRAGSystem(RAGSystem):
             chunk_overlap (int): Superposición entre chunks.
         """
         super().__init__(
-            pdf_directory=os.path.join(base_dir, "GuideLines"),
-            csv_file=os.path.join(base_dir, "raw_data", "BankCustomerChurnPrediction.csv"),
+            pdf_directory=os.path.join(base_dir, "../data/GuideLines"),
+            csv_file=os.path.join(base_dir, "../data/raw_data/BankCustomerChurnPrediction.csv"),
             base_dir=base_dir
         )
         self.base_dir = base_dir
@@ -115,7 +115,7 @@ def main():
     """
     st.title("Sistema de Consultas Bancarias RAG Configurable")
 
-    base_dir = "/Users/adrianinfantes/Desktop/AIR/CollegeStudies/MachineLearningPath/YouTube/LangChainRAGOllama/data"
+    base_dir = "../data"
 
     @st.cache_resource
     def load_rag_system():
