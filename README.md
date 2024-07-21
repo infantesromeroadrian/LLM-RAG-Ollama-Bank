@@ -1,76 +1,79 @@
-# 📚🤖 Chatbot con Recuperación y Generación de Respuestas (RAG)
+# 🏦 Sistema RAG Bancario con Ollama
 
-¡Bienvenido al proyecto **Chatbot con RAG**! Este proyecto utiliza un modelo de lenguaje para responder a tus preguntas basándose en la información contenida en un archivo PDF que cargues. 🎉
+## 🌟 Introducción
+Este proyecto implementa un sistema de Generación Aumentada por Recuperación (RAG) para consultas bancarias, utilizando Ollama como modelo de lenguaje. El sistema está diseñado para proporcionar respuestas precisas a preguntas sobre datos bancarios, combinando la potencia de los modelos de lenguaje con la recuperación de información específica del dominio.
 
-## 🚀 Funcionalidades
+![Diagrama del Sistema RAG](https://github.com/infantesromeroadrian/RAG-Ollama-Bank/blob/93914d09dbb2758b191fdd7b6877ae7b747e97c6/assets/rag_system_diagram.png)
 
-- 📄 **Carga de archivos PDF**: Sube cualquier archivo PDF y nuestro sistema lo procesará para extraer la información.
-- 🧠 **Modelo de Lenguaje**: Utiliza un potente modelo de lenguaje para generar respuestas basadas en el contenido del PDF.
-- 🔍 **Recuperación de Información**: Encuentra y muestra las secciones relevantes del PDF que contienen las respuestas.
-- 💬 **Interfaz de Chat**: Haz preguntas y obtén respuestas de manera interactiva a través de una interfaz web fácil de usar.
+## 🚀 Características Principales
+- 💻 Interfaz interactiva basada en Streamlit
+- 📄 Procesamiento de documentos PDF y CSV
+- 🤖 Generación de respuestas utilizando Ollama
+- 🔍 Recuperación personalizada de documentos relevantes
+- ⚙️ Sistema configurable con parámetros ajustables
+- 📊 Evaluación de rendimiento integrada
 
-## 🛠️ Cómo Configurar y Ejecutar el Proyecto
+## 📋 Requisitos
+- 🐍 Python 3.8+
+- 🖥️ Streamlit
+- 🔗 LangChain
+- 🦙 Ollama
+- 📚 PyMuPDF
+- 🐼 Pandas
+- 📈 Matplotlib
+- 🌳 Graphviz (para la generación de diagramas)
 
-### Prerrequisitos
+## 🛠️ Instalación
+1. Clone el repositorio:
+   ```
+   git clone https://github.com/tu-usuario/rag-ollama-bank.git
+   cd rag-ollama-bank
+   ```
+2. Instale las dependencias:
+   ```
+   pip install -r requirements.txt
+   ```
+3. Asegúrese de tener Ollama instalado y configurado en su sistema.
 
-Asegúrate de tener instaladas las siguientes herramientas:
+## 🏃‍♂️ Uso
+Para iniciar la aplicación Streamlit:
+```
+streamlit run app.py
+```
 
-- Python 3.7+
-- Poetry (opcional, pero recomendado para manejar dependencias)
+## 📁 Estructura del Proyecto
+- `app.py`: 🚪 Punto de entrada principal y interfaz de Streamlit
+- `src/`
+  - `models/`: 🧠 Contiene el sistema RAG y componentes relacionados
+  - `utils/`: 🔧 Utilidades para carga de documentos, procesamiento y evaluación
+- `data/`: 💾 Directorio para almacenar documentos PDF y CSV
+- `assets/`: 🖼️ Contiene recursos como el diagrama del sistema
 
-### Instalación
+## 🔄 Explicación del Diagrama del Sistema
+El diagrama muestra el flujo de datos y los componentes principales del sistema RAG:
 
-1. **Clona el repositorio**:
-    ```sh
-    git clone https://github.com/infantesromeroadrian/RAG-Ollama.git
-    cd RAG-Ollama
-    ```
+1. 👤 **Usuario e Interfaz**: El flujo comienza con el usuario interactuando con la interfaz Streamlit.
+2. 🔄 **Procesamiento de la Pregunta**: La pregunta pasa por el `StreamlitRAGSystem` al `RAGSystem` central.
+3. 📥 **Carga y Procesamiento de Documentos**: Se utilizan `DocumentLoader` y `DataProcessor` para manejar PDFs y CSVs.
+4. 🧮 **Gestión de Vectores**: `VectorStoreManager` y `FastEmbedEmbeddings` crean y gestionan embeddings en `Chroma VectorStore`.
+5. 🔎 **Recuperación y Generación**: `CustomRetriever` obtiene documentos relevantes, y `Ollama LLM` genera la respuesta final.
+6. ⚙️ **Configuración y Evaluación**: El sistema permite ajustes de configuración y incluye métricas de evaluación.
 
-2. **Instala las dependencias**:
-    - Con Poetry:
-        ```sh
-        poetry install
-        pipenv shell
-        ```
-    
-### Ejecución
+## 🎛️ Configuración
+- Ajuste los parámetros del modelo y del sistema a través de la interfaz de Streamlit.
+- Modifique los directorios de datos en `app.py` según sea necesario.
 
-1. **Ejecuta la aplicación de Streamlit**:
-    ```sh
-    streamlit run app.py
-    ```
-
-2. **Abre tu navegador** y navega a `http://localhost:8501` para ver la aplicación en acción.
-
-## 📂 Estructura del Proyecto
-
-- `app.py`: Archivo principal que contiene la aplicación Streamlit.
-- `language_model.py`: Módulo para cargar y utilizar el modelo de lenguaje RAG.
-- `document_loader.py`: Módulo para cargar, procesar y almacenar los datos del PDF.
-- `text_splitter.py`: Módulo para dividir el texto del PDF en fragmentos.
-- `embedding_model.py`: Módulo para crear y almacenar los embeddings del PDF.
-- `vector_store.py`: Módulo para crear y almacenar el vector de búsqueda.
-- `qa_pipeline.py`: Módulo para crear y ejecutar la cadena de RAG.
-
-## ✨ Cómo Usar la Aplicación
-
-1. **Carga un archivo PDF**: En la barra lateral, selecciona un archivo PDF desde tu computadora.
-2. **Espera a que se procese**: El archivo será cargado y procesado automáticamente.
-3. **Haz una pregunta**: Escribe tu pregunta en el cuadro de texto y presiona el botón "Preguntar".
-4. **Obtén la respuesta**: La respuesta generada se mostrará junto con los metadatos de los documentos fuente.
+## 🧪 Evaluación y Pruebas
+El sistema incluye funcionalidades para ejecutar pruebas y evaluar el rendimiento:
+1. Use el botón "Ejecutar Pruebas" en la interfaz de Streamlit.
+2. Los resultados se guardarán en un archivo CSV y se visualizarán en la interfaz.
 
 ## 🤝 Contribuciones
+Las contribuciones son bienvenidas. Por favor, abra un issue para discutir cambios mayores antes de enviar un pull request.
 
-¡Las contribuciones son bienvenidas! Si tienes ideas para mejorar el proyecto, siéntete libre de abrir un issue o enviar un pull request.
-
-## 📧 Contacto
-
-Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarme a través de [infantesromeroadrian@gmail.com](mailto:infantesromeroadrian@gmail.com).
-
-## 🌟 Agradecimientos
-
-A todos los que han contribuido y apoyado este proyecto. ¡Gracias!
+## 📜 Licencia
+[Incluir información sobre la licencia aquí]
 
 ---
 
-¡Esperamos que disfrutes usando el Chatbot con RAG! 🚀🤖📚
+Para más información o consultas, por favor abra un issue en el repositorio de GitHub. 📩
