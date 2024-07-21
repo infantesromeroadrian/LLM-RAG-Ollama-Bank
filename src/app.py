@@ -60,7 +60,7 @@ def main():
     """Función principal que configura y ejecuta la interfaz de Streamlit."""
     st.title("Sistema de Consultas Bancarias RAG Configurable")
 
-    base_dir = "/Users/adrianinfantes/Desktop/AIR/CollegeStudies/MachineLearningPath/YouTube/LangChainRAGOllama/data"
+    base_dir = "../data"
 
     @st.cache_resource
     def load_rag_system():

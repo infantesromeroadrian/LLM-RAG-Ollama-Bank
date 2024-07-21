@@ -1,31 +1,31 @@
 timestamp,question,answer,reference_answer,source,source_content,bleu_score,rouge_scores_rouge-1,rouge_scores_rouge-2,rouge_scores_rouge-l,source_relevance,response_time
-2024-07-21T03:35:08.168758,¿Cuántos clientes únicos tenemos en el banco según nuestra data en el CSV?,"Según el resumen del CSV, tenemos un total de 10,000 clientes únicos en el banco.","Según los datos del CSV, tenemos 10000 clientes únicos en el banco.",CSV_summary,"
+2024-07-21T18:12:35.137267,¿Cuántos clientes únicos tenemos en el banco según nuestra data en el CSV?,10000,"Según los datos del CSV, tenemos 10000 clientes únicos en el banco.",CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.37573260073260073,0.6923076873372783,0.479999995072,0.6923076873372783,0.09090909090909091,16.365401029586792
-2024-07-21T03:35:16.561910,¿Cuál es el saldo promedio de los clientes?,El saldo promedio es 76485.89 euros.,"El saldo promedio de los clientes es 76,485.89 euros.",CSV_summary,"
+- Columnas: customer_id, ",1.0,0.15384615242603553,0.0,0.15384615242603553,0.09090909090909091,20.3591890335083
+2024-07-21T18:12:43.843276,¿Cuál es el saldo promedio de los clientes?,El saldo promedio es 76485.89.,"El saldo promedio de los clientes es 76,485.89 euros.",CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.37083333333333335,0.7058823480968859,0.39999999520000007,0.7058823480968859,0.25,8.391563892364502
-2024-07-21T03:35:24.529492,¿Cuántos países están representados en nuestros datos de clientes?,"France, Spain, Germany (3 países)","En nuestros datos de clientes están representados 3 países: Francia, España y Alemania.",CSV_summary,"
+- Columnas: customer_id, ",0.4083333333333333,0.6249999953125001,0.285714281122449,0.6249999953125001,0.25,8.704316139221191
+2024-07-21T18:12:52.502310,¿Cuántos países están representados en nuestros datos de clientes?,"Tres países están representados en nuestros datos de clientes: France, Spain y Germany.","En nuestros datos de clientes están representados 3 países: Francia, España y Alemania.",CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.0,0.0,0.0,0.0,0.1111111111111111,7.96692681312561
-2024-07-21T03:35:32.876881,¿Cuál es la tasa de abandono de clientes?,La tasa de abandono (churn) es del 20.37%.,La tasa de abandono de clientes es del 20.37%.,CSV_summary,"
+- Columnas: customer_id, ",0.20061188811188813,0.4615384565384616,0.24999999500000009,0.3076923026923078,0.1111111111111111,8.657365798950195
+2024-07-21T18:13:00.445805,¿Cuál es la tasa de abandono de clientes?,20.37%,La tasa de abandono de clientes es del 20.37%.,CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.5723214285714286,0.888888883888889,0.7058823479584776,0.888888883888889,0.2857142857142857,8.343080997467041
-2024-07-21T03:35:41.256527,¿Cuál es el rango de edades de nuestros clientes?,El rango de edades de nuestros clientes es de 18 a 92 años.,El rango de edades de nuestros clientes es de 18 a 92 años.,CSV_summary,"
+- Columnas: customer_id, ",0.0,0.363636360661157,0.1999999982,0.363636360661157,0.2857142857142857,7.9413511753082275
+2024-07-21T18:13:09.131995,¿Cuál es el rango de edades de nuestros clientes?,El rango de edades de nuestros clientes es de 18 a 92 años.,El rango de edades de nuestros clientes es de 18 a 92 años.,CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",1.0,0.999999995,0.999999995,0.999999995,0.25,8.378790855407715
-2024-07-21T03:35:43.842224,¿Qué porcentaje de clientes tiene tarjeta de crédito?,70.55%,El 70.51% de los clientes tiene tarjeta de crédito.,CSV_summary,"
+- Columnas: customer_id, ",1.0,0.999999995,0.999999995,0.999999995,0.25,8.68459701538086
+2024-07-21T18:13:11.883064,¿Qué porcentaje de clientes tiene tarjeta de crédito?,70.55%,El 70.51% de los clientes tiene tarjeta de crédito.,CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.0,0.18181817884297521,0.0,0.18181817884297521,0.2857142857142857,2.5850486755371094
+- Columnas: customer_id, ",0.0,0.18181817884297521,0.0,0.18181817884297521,0.2857142857142857,2.750380039215088
