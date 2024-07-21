@@ -1,1 +1,27 @@
-timestamp,question,answer,reference_answer,source,source_content,bleu_score,rouge-1,rouge-2,rouge-l,perplexity,source_relevance,response_time
+timestamp,question,answer,reference_answer,source,source_content,bleu_score,rouge_scores_rouge-1,rouge_scores_rouge-2,rouge_scores_rouge-l,source_relevance,response_time
+2024-07-21T02:52:14.403922,¿Cuál es el saldo promedio de los clientes?,El saldo promedio es de 76485.89 euros.,"El saldo promedio de los clientes es 76,485.89 euros.",CSV_summary,"
+IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
+- Total de filas (clientes únicos): 10000
+- Número exacto de clientes únicos: 10000
+- Columnas: customer_id, ",0.3476190476190476,0.7777777728395062,0.37499999507812504,0.6666666617283951,0.25,14.317194938659668
+2024-07-21T02:52:18.943329,¿Cuántos clientes tienen tarjeta de crédito?,70.55% of the customers have a credit card.,Un total de 7050 clientes tienen tarjeta de crédito.,CSV_summary,"
+IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
+- Total de filas (clientes únicos): 10000
+- Número exacto de clientes únicos: 10000
+- Columnas: customer_id, ",0.0,0.0,0.0,0.0,0.3333333333333333,4.533823251724243
+2024-07-21T02:52:36.429792,¿Cuáles son las regulaciones sobre el cumplimiento bancario?,"Según el resumen del CSV, las regulaciones sobre el cumplimiento bancario incluyen:
+
+* Identificación de Clientes: Obligatorio proceso de ""Conozca a su Cliente"" para todas las cuentas nuevas y actualización periódica de la información del cliente cada 2 años.
+* Reporte de Operaciones Sospechosas: Monitoreo continuo de transacciones para detectar patrones inusuales y reporte obligatorio a las autoridades de cualquier actividad sospechosa.
+* Prevención de Fraudes: Sistema de monitoreo 24/7 para detectar actividades sospechosas, notificaciones automáticas al cliente por transacciones inusuales y bloqueo temporal de cuentas ante intentos de acceso no autorizados.
+
+Además, se menciona la Protección de Información Personal, que se maneja conforme al Reglamento General de Protección de Datos (RGPD) y se utiliza encriptación de extremo a extremo para todas las transacciones en línea.",Las regulaciones sobre el cumplimiento bancario incluyen medidas de KYC y AML.,CSV_summary,"
+IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
+- Total de filas (clientes únicos): 10000
+- Número exacto de clientes únicos: 10000
+- Columnas: customer_id, ",0.03200231663606959,0.14432989473907962,0.06106870075170449,0.14432989473907962,0.0,17.4767427444458
+2024-07-21T02:52:49.261340,¿Qué recomendaciones se hacen en el documento PDF para la gestión de riesgos?,"La normativa 7 ""Normativa de Prevención de Blanqueo de Capitales"" menciona la identificación de clientes y el monitoreo continuo de transacciones para detectar patrones inusuales, lo que sugiere recomendaciones para la gestión de riesgos en relación con la prevención de blanqueo de capitales.",Las recomendaciones para la gestión de riesgos incluyen la implementación de controles internos efectivos.,CSV_summary,"
+IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
+- Total de filas (clientes únicos): 10000
+- Número exacto de clientes únicos: 10000
+- Columnas: customer_id, ",0.11941377657132053,0.26666666275555556,0.1818181782082645,0.26666666275555556,0.07692307692307693,12.829601764678955
