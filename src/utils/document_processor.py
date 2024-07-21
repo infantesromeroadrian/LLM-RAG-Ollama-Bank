@@ -1,22 +1,5 @@
 # 2. data_processor.py
 
-"""
-data_processor.py
-
-Este módulo proporciona funcionalidades para procesar documentos y datos CSV.
-Incluye métodos para dividir documentos, crear resúmenes de CSV y generar documentos
-a partir de registros CSV.
-
-Dependencias:
-- typing
-- langchain.text_splitter
-- langchain_core.documents
-- pandas
-
-Clases:
-- DataProcessor
-"""
-
 from typing import List
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
@@ -56,10 +39,6 @@ class DataProcessor:
 
         Returns:
             Document: Un objeto Document que contiene el resumen del CSV.
-
-        Nota:
-            El resumen incluye estadísticas clave como el número total de filas,
-            clientes únicos, rango de edades, países representados, etc.
         """
         csv_summary = f"""
         RESUMEN IMPORTANTE DEL CSV 'BankCustomerChurnPrediction.csv':
@@ -88,18 +67,7 @@ class DataProcessor:
 
         Returns:
             List[Document]: Lista de objetos Document, cada uno representando una fila del CSV.
-
-        Nota:
-            Utiliza un muestreo aleatorio con una semilla fija para reproducibilidad.
         """
         csv_sample = df.sample(n=sample_size, random_state=42)
         return [Document(page_content=row.to_json(), metadata={"source": "CSV_record", "importance": 1})
                 for _, row in csv_sample.iterrows()]
-
-# Ejemplo de uso:
-# docs = [Document(...), Document(...)]
-# split_docs = DataProcessor.split_documents(docs)
-#
-# df = pd.read_csv('BankCustomerChurnPrediction.csv')
-# csv_summary = DataProcessor.create_csv_summary(df)
-# csv_docs = DataProcessor.create_csv_docs(df)

@@ -1,22 +1,7 @@
 # 6.qa_system.py
 
-"""
-qa_system.py
-
-Este módulo define un sistema de preguntas y respuestas (QA) que utiliza un modelo de lenguaje
-y un recuperador personalizado para responder preguntas basadas en un contexto dado.
-
-Dependencias:
-- langchain.prompts
-- langchain.chains
-
-Clases:
-- QASystem
-"""
-
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
-
 
 class QASystem:
     """
@@ -46,9 +31,6 @@ class QASystem:
     def setup_qa_chain(self):
         """
         Configura la cadena de QA con un prompt personalizado.
-
-        Esta función crea un PromptTemplate con instrucciones específicas y lo utiliza
-        para configurar una cadena RetrievalQA.
         """
         prompt = PromptTemplate(
             template="""Utiliza la siguiente información para responder a la pregunta del usuario.
@@ -82,9 +64,6 @@ class QASystem:
         """
         Realiza una pregunta al sistema QA.
 
-        Esta función utiliza la cadena QA configurada para procesar la pregunta
-        y generar una respuesta basada en la información recuperada.
-
         Args:
             question (str): La pregunta a responder.
 
@@ -97,11 +76,3 @@ class QASystem:
         if not self.qa_chain:
             raise ValueError("QA chain not set up. Run setup_qa_chain first.")
         return self.qa_chain.invoke({"query": question})
-
-# Ejemplo de uso:
-# llm = SomeLanguageModel()
-# custom_retriever = CustomRetriever(...)
-# qa_system = QASystem(llm, custom_retriever)
-# qa_system.setup_qa_chain()
-# response = qa_system.ask_question("¿Cuál es el saldo promedio de los clientes?")
-# print(response["result"])

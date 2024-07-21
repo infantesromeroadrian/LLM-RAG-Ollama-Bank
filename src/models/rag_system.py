@@ -1,43 +1,21 @@
 # 7. rag_system.py
 
-"""
-rag_system.py
-
-Este módulo implementa un sistema RAG (Retrieval-Augmented Generation) que integra
-la gestión de documentos, el almacenamiento de vectores, la recuperación personalizada
-y un sistema de preguntas y respuestas.
-
-Dependencias:
-- os
-- src.utils.document_manager
-- src.features.vector_store_manager
-- src.features.custom_retriever
-- src.models.qa_system
-- langchain_community.llms
-- langchain_community.embeddings.fastembed
-
-Clases:
-- RAGSystem
-"""
-
-import os
-from src.utils.document_manager import DocumentManager
+from langchain_community.llms import Ollama
+from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
+from src.utils.document_loader import DocumentLoader
+from src.utils.document_processor import DataProcessor
 from src.features.vector_store_manager import VectorStoreManager
 from src.features.custom_retriever import CustomRetriever
 from src.models.qa_system import QASystem
-from langchain_community.llms import Ollama
-from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 
 class RAGSystem:
     """
     Sistema RAG que integra la gestión de documentos, almacenamiento de vectores,
     recuperación personalizada y un sistema de preguntas y respuestas.
 
-    Esta clase orquesta el flujo completo de un sistema RAG, desde la carga de documentos
-    hasta la generación de respuestas a preguntas.
-
     Atributos:
-        document_manager (DocumentManager): Gestor para cargar y procesar documentos.
+        pdf_directory (str): Ruta al directorio que contiene los archivos PDF.
+        csv_file (str): Ruta al archivo CSV con datos.
         llm (Ollama): Modelo de lenguaje para generar respuestas.
         embed_model (FastEmbedEmbeddings): Modelo de embeddings para vectorizar documentos.
         vector_store_manager (VectorStoreManager): Gestor del almacén de vectores.
@@ -53,7 +31,8 @@ class RAGSystem:
             csv_file (str): Ruta al archivo CSV con datos.
             base_dir (str): Directorio base para almacenar el almacén de vectores.
         """
-        self.document_manager = DocumentManager(pdf_directory, csv_file)
+        self.pdf_directory = pdf_directory
+        self.csv_file = csv_file
         self.llm = Ollama(model="llama3")
         self.embed_model = FastEmbedEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
         self.vector_store_manager = VectorStoreManager(self.embed_model, base_dir)
@@ -66,18 +45,26 @@ class RAGSystem:
         Este método carga y procesa los documentos, crea el almacén de vectores,
         configura el recuperador personalizado y establece el sistema de preguntas y respuestas.
         """
-        # Load and process documents
-        documents = self.document_manager.load_and_process_documents()
-        print(f"Total documents processed: {len(documents)}")
+        # Cargar documentos
+        pdf_docs = DocumentLoader.load_pdfs(self.pdf_directory)
+        df = DocumentLoader.load_csv(self.csv_file)
 
-        # Create vector store
-        vector_store = self.vector_store_manager.create_vector_store(documents)
+        # Procesar documentos
+        split_docs = DataProcessor.split_documents(pdf_docs)
+        csv_summary_doc = DataProcessor.create_csv_summary(df)
+        csv_docs = DataProcessor.create_csv_docs(df)
+
+        # Combinar todos los documentos procesados
+        all_docs = [csv_summary_doc] + csv_docs + split_docs
+
+        # Crear vector store
+        vector_store = self.vector_store_manager.create_vector_store(all_docs)
         print(f"Vector store created with {vector_store._collection.count()} documents")
 
-        # Set up custom retriever
+        # Configurar el recuperador personalizado
         custom_retriever = CustomRetriever(vectorstore=vector_store)
 
-        # Set up QA system
+        # Configurar el sistema QA
         self.qa_system = QASystem(self.llm, custom_retriever)
         self.qa_system.setup_qa_chain()
         print("QA system set up successfully")
@@ -99,8 +86,18 @@ class RAGSystem:
             raise ValueError("QA system not set up. Run the 'run' method first.")
         return self.qa_system.ask_question(question)
 
-# Ejemplo de uso:
-# rag_system = RAGSystem(pdf_directory="/path/to/pdfs", csv_file="/path/to/data.csv", base_dir="/path/to/base")
-# rag_system.run()
-# response = rag_system.ask_question("¿Cuál es el saldo promedio de los clientes?")
-# print(response["result"])
+    def get_system_info(self):
+        """
+        Proporciona información sobre el estado actual del sistema RAG.
+
+        Returns:
+            dict: Un diccionario con información sobre los componentes del sistema.
+        """
+        return {
+            "pdf_directory": self.pdf_directory,
+            "csv_file": self.csv_file,
+            "llm_model": self.llm.model,
+            "embedding_model": self.embed_model.model_name,
+            "vector_store_base_dir": self.vector_store_manager.base_dir,
+            "qa_system_status": "Configured" if self.qa_system else "Not configured"
+        }
