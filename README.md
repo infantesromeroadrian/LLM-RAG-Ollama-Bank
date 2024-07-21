@@ -26,12 +26,12 @@ Este proyecto implementa un sistema de Generación Aumentada por Recuperación (
 ## 🛠️ Instalación
 1. Clone el repositorio:
    ```
-   git clone https://github.com/tu-usuario/rag-ollama-bank.git
+   git clone https://github.com/infantesromeroadrian/RAG-Ollama-Bank.git
    cd rag-ollama-bank
    ```
 2. Instale las dependencias:
    ```
-   pip install -r requirements.txt
+   poetry install
    ```
 3. Asegúrese de tener Ollama instalado y configurado en su sistema.
 
@@ -46,6 +46,7 @@ streamlit run app.py
 - `src/`
   - `models/`: 🧠 Contiene el sistema RAG y componentes relacionados
   - `utils/`: 🔧 Utilidades para carga de documentos, procesamiento y evaluación
+  - `features/`: 📈 Funciones para generar gráficos y visualizaciones
 - `data/`: 💾 Directorio para almacenar documentos PDF y CSV
 - `assets/`: 🖼️ Contiene recursos como el diagrama del sistema
 
@@ -72,7 +73,7 @@ El sistema incluye funcionalidades para ejecutar pruebas y evaluar el rendimient
 Las contribuciones son bienvenidas. Por favor, abra un issue para discutir cambios mayores antes de enviar un pull request.
 
 ## 📜 Licencia
-[Incluir información sobre la licencia aquí]
+[MIT](https://choosealicense.com/licenses/mit/) © [Adrián Infantes](https://github.com/infantesromeroadrian)
 
 ---
 
