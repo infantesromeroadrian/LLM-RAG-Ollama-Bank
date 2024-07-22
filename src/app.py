@@ -1,5 +1,7 @@
 # 1. app.py
 
+# app.py
+
 import streamlit as st
 import os
 import pandas as pd
@@ -88,7 +90,7 @@ def main():
             rag_system.update_parameters(model_name, temperature, chunk_size, chunk_overlap)
         st.success("Configuración actualizada y documentos reprocesados")
 
-    st.write("Este sistema utiliza RAG (Retrieval-Augmented Generation) para responder preguntas sobre datos bancarios.")
+    st.write("Este sistema utiliza RAG (Retrieval-Augmented Generation) para responder preguntas sobre datos bancarios y normativas.")
 
     # Área de preguntas y respuestas
     user_question = st.text_input("Ingrese su pregunta aquí:")
@@ -117,7 +119,12 @@ def main():
         "¿Cuántos países están representados en nuestros datos de clientes?",
         "¿Cuál es la tasa de abandono de clientes?",
         "¿Cuál es el rango de edades de nuestros clientes?",
-        "¿Qué porcentaje de clientes tiene tarjeta de crédito?"
+        "¿Qué porcentaje de clientes tiene tarjeta de crédito?",
+        "¿Cuáles son los requisitos para abrir una cuenta bancaria?",
+        "¿Qué medidas de seguridad se aplican para proteger las transacciones en línea?",
+        "¿Cuál es la política del banco respecto a los préstamos hipotecarios?",
+        "¿Cómo maneja el banco las reclamaciones de los clientes?",
+        "¿Cuáles son las normativas sobre prevención de lavado de dinero que sigue el banco?"
     ]
     for question in example_questions:
         st.write(f"- {question}")
@@ -131,7 +138,12 @@ def main():
                 "En nuestros datos de clientes están representados 3 países: Francia, España y Alemania.",
                 "La tasa de abandono de clientes es del 20.37%.",
                 "El rango de edades de nuestros clientes es de 18 a 92 años.",
-                "El 70.51% de los clientes tiene tarjeta de crédito."
+                "El 70.51% de los clientes tiene tarjeta de crédito.",
+                "Para abrir una cuenta bancaria, generalmente se requiere una identificación válida, comprobante de domicilio y un depósito inicial mínimo.",
+                "El banco utiliza encriptación de extremo a extremo, autenticación de dos factores y monitoreo constante para proteger las transacciones en línea.",
+                "La política de préstamos hipotecarios del banco incluye evaluación de crédito, tasas de interés competitivas y plazos flexibles de hasta 30 años.",
+                "El banco maneja las reclamaciones a través de un proceso estructurado que incluye recepción, investigación, resolución y seguimiento, con un plazo máximo de respuesta de 15 días hábiles.",
+                "El banco sigue estrictas normativas de KYC (Know Your Customer) y realiza monitoreo constante de transacciones para prevenir el lavado de dinero."
             ]
             results = run_tests(rag_system, example_questions, reference_answers, 'resultados_pruebas.csv')
         st.success("Pruebas completadas. Resultados guardados en 'resultados_pruebas.csv'")

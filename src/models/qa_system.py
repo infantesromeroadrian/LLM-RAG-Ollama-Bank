@@ -33,8 +33,8 @@ class QASystem:
         Configura la cadena de QA con un prompt personalizado.
         """
         prompt = PromptTemplate(
-            template="""Utiliza la siguiente información para responder a la pregunta del usuario.
-            IMPORTANTE: Para preguntas sobre datos agregados o estadísticas del banco, SIEMPRE consulta primero el resumen del CSV.
+            template="""Utiliza la siguiente información del CSV y del PDF para responder a la pregunta del usuario.
+            IMPORTANTE: Para preguntas sobre datos legales o normativa del banco usa siempre el PDF.
             Este resumen contiene información precisa y confiable sobre el conjunto de datos completo.
             No te bases en ejemplos individuales para hacer generalizaciones sobre todo el conjunto de datos.
 
@@ -46,7 +46,9 @@ class QASystem:
             Contexto: {context}
             Pregunta: {question}
 
-            Proporciona solo la respuesta útil a continuación, nada más. Si la respuesta involucra un recuento o estadística, asegúrate de proporcionar el número exacto encontrado en el resumen del CSV.
+            Proporciona solo la respuesta útil a continuación, nada más. 
+            Si la respuesta involucra un recuento o estadística, 
+            asegúrate de proporcionar el número exacto encontrado en el resumen del CSV o informacion valida del PDF.
             Respuesta útil:
             """,
             input_variables=["context", "question"]
