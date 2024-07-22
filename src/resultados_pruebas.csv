@@ -1,56 +1,64 @@
 timestamp,question,answer,reference_answer,source,source_content,bleu_score,rouge_scores_rouge-1,rouge_scores_rouge-2,rouge_scores_rouge-l,source_relevance,response_time
-2024-07-22T10:10:22.727061,¿Cuántos clientes únicos tenemos en el banco según nuestra data en el CSV?,"Según el resumen del CSV, tenemos 10,000 clientes únicos en el banco.","Según los datos del CSV, tenemos 10000 clientes únicos en el banco.",CSV_summary,"
+2024-07-22T18:21:28.663222,¿Cuántos clientes únicos tenemos en el banco según nuestra data en el CSV?,"Según el resumen del CSV, tenemos 10000 clientes únicos en el banco.","Según los datos del CSV, tenemos 10000 clientes únicos en el banco.",CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.4794191919191919,0.7826086906616257,0.5454545404545454,0.7826086906616257,0.09090909090909091,13.92005705833435
-2024-07-22T10:10:31.619979,¿Cuál es el saldo promedio de los clientes?,El saldo promedio es 76485.89 euros.,"El saldo promedio de los clientes es 76,485.89 euros.",CSV_summary,"
+- Columnas: customer_id, ",0.7318181818181818,0.8695652124007562,0.7272727222727273,0.8695652124007562,0.09090909090909091,15.513593673706055
+2024-07-22T18:21:41.690644,¿Cuál es el saldo promedio de los clientes?,El saldo promedio es 76485.89.,"El saldo promedio de los clientes es 76,485.89 euros.",CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.37083333333333335,0.7058823480968859,0.39999999520000007,0.7058823480968859,0.25,8.891020059585571
-2024-07-22T10:10:40.587519,¿Cuántos países están representados en nuestros datos de clientes?,"Tres países están representados en nuestros datos de clientes: France, Spain y Germany.","En nuestros datos de clientes están representados 3 países: Francia, España y Alemania.",CSV_summary,"
+- Columnas: customer_id, ",0.4083333333333333,0.6249999953125001,0.285714281122449,0.6249999953125001,0.25,13.018753051757812
+2024-07-22T18:21:52.749048,¿Cuántos países están representados en nuestros datos de clientes?,"Según el resumen del CSV, los países representados son tres: France, Spain y Germany.","En nuestros datos de clientes están representados 3 países: Francia, España y Alemania.",CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.20061188811188813,0.4615384565384616,0.24999999500000009,0.3076923026923078,0.1111111111111111,8.966413021087646
-2024-07-22T10:10:49.603792,¿Cuál es la tasa de abandono de clientes?,La tasa de abandono (churn) es del 20.37%.,La tasa de abandono de clientes es del 20.37%.,CSV_summary,"
+- Columnas: customer_id, ",0.03571428571428571,0.14814814315500704,0.0,0.14814814315500704,0.1111111111111111,11.056413173675537
+2024-07-22T18:22:03.589765,¿Cuál es la tasa de abandono de clientes?,La tasa de abandono (churn) es del 20.37%.,La tasa de abandono de clientes es del 20.37%.,CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.5723214285714286,0.888888883888889,0.7058823479584776,0.888888883888889,0.2857142857142857,9.014562845230103
-2024-07-22T10:10:58.684590,¿Cuál es el rango de edades de nuestros clientes?,El rango de edades de nuestros clientes es de 18 a 92 años.,El rango de edades de nuestros clientes es de 18 a 92 años.,CSV_summary,"
+- Columnas: customer_id, ",0.5723214285714286,0.888888883888889,0.7058823479584776,0.888888883888889,0.2857142857142857,10.838095664978027
+2024-07-22T18:22:14.850679,¿Cuál es el rango de edades de nuestros clientes?,El rango de edades de nuestros clientes es de 18 a 92 años.,El rango de edades de nuestros clientes es de 18 a 92 años.,CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",1.0,0.999999995,0.999999995,0.999999995,0.25,9.079596042633057
-2024-07-22T10:11:01.413408,¿Qué porcentaje de clientes tiene tarjeta de crédito?,70.55%,El 70.51% de los clientes tiene tarjeta de crédito.,CSV_summary,"
+- Columnas: customer_id, ",1.0,0.999999995,0.999999995,0.999999995,0.25,11.259980201721191
+2024-07-22T18:22:17.803318,¿Qué porcentaje de clientes tiene tarjeta de crédito?,70.55%,El 70.51% de los clientes tiene tarjeta de crédito.,CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.0,0.18181817884297521,0.0,0.18181817884297521,0.2857142857142857,2.728480100631714
-2024-07-22T10:11:12.857365,¿Cuáles son los requisitos para abrir una cuenta bancaria?,"Según la normativa del Banco Universal S. A., para abrir una cuenta bancaria, el cliente debe presentar una identificación válida y vigente, y realizar un depósito inicial mínimo de 100 euros para cuentas de ahorro y 500 euros para cuentas corrientes. Los menores de edad pueden abrir cuentas con la autorización de un tutor legal.","Para abrir una cuenta bancaria, generalmente se requiere una identificación válida, comprobante de domicilio y un depósito inicial mínimo.",CSV_summary,"
+- Columnas: customer_id, ",0.0,0.18181817884297521,0.0,0.18181817884297521,0.2857142857142857,2.9520609378814697
+2024-07-22T18:22:32.469416,¿Cuáles son los requisitos para abrir una cuenta bancaria?,"Para abrir una cuenta, el cliente debe presentar una identificación válida y vigente (según la normativa del Banco Universal S. A.). Además, se requiere un depósito inicial mínimo de 100 euros para cuentas de ahorro y 500 euros para cuentas corrientes. Los menores de edad pueden abrir cuentas con la autorización de un tutor legal.","Para abrir una cuenta bancaria, generalmente se requiere una identificación válida, comprobante de domicilio y un depósito inicial mínimo.",CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.0967364134816965,0.3666666624666668,0.19718309480658602,0.3666666624666668,0.0,11.441250085830688
-2024-07-22T10:11:23.426889,¿Qué medidas de seguridad se aplican para proteger las transacciones en línea?,"Según la información del CSV y PDF, no hay una medida específica para proteger las transacciones en línea mencionada explícitamente. Sin embargo, se puede mencionar que el banco telefónico está disponible 24/7 para consultas y operaciones básicas, lo que sugiere que hay un canal de comunicación seguro para realizar transacciones en línea. Además, se establece un proceso de ""Conozca a su Cliente"" para todas las cuentas nuevas, lo que puede ayudar a prevenir posibles fraudes o actividades ilícitas relacionadas con las transacciones en línea.","El banco utiliza encriptación de extremo a extremo, autenticación de dos factores y monitoreo constante para proteger las transacciones en línea.",CSV_summary,"
+- Columnas: customer_id, ",0.09175719458738327,0.38709677007284077,0.19718309480658602,0.38709677007284077,0.0,14.658209085464478
+2024-07-22T18:22:45.101321,¿Qué medidas de seguridad se aplican para proteger las transacciones en línea?,"Para proteger las transacciones en línea, se aplican las siguientes medidas:
+
+* Transferencias internacionales: 0.4% del monto, mínimo 15 euros (se encuentra en el punto 2 del PDF).
+* Monitoreo continuo de transacciones para detectar patrones inusuales y reporte obligatorio a las autoridades de cualquier actividad sospechosa (se encuentra en el punto 7.2 del PDF).","El banco utiliza encriptación de extremo a extremo, autenticación de dos factores y monitoreo constante para proteger las transacciones en línea.",CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.06925271741242943,0.2439024353361095,0.10309278023169315,0.2439024353361095,0.08333333333333333,10.566064834594727
-2024-07-22T10:11:36.523545,¿Cuál es la política del banco respecto a los préstamos hipotecarios?,"Según el PDF de normativas del Banco Universal S. A., la política del banco respecto a los préstamos hipotecarios es financiamiento de hasta el 80% del valor de tasación de la propiedad, con un plazo máximo de 30 años y una tasa de interés fija o variable con referencia Euribor + margen.","La política de préstamos hipotecarios del banco incluye evaluación de crédito, tasas de interés competitivas y plazos flexibles de hasta 30 años.",CSV_summary,"
+- Columnas: customer_id, ",0.06903963436982305,0.25806451175858486,0.08571428163265325,0.19354838272632682,0.08333333333333333,12.629355907440186
+2024-07-22T18:23:02.828931,¿Cuál es la política del banco respecto a los préstamos hipotecarios?,"Según el PDF, la política del banco respecto a los préstamos hipotecarios es que el financiamiento es hasta el 80% del valor de tasación de la propiedad y el plazo máximo de 30 años. La tasa de interés puede ser fija o variable con referencia Euribor + margen.","La política de préstamos hipotecarios del banco incluye evaluación de crédito, tasas de interés competitivas y plazos flexibles de hasta 30 años.",CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.0821078431372549,0.3548387054266389,0.13698629727153325,0.22580644736212285,0.18181818181818182,13.095664024353027
-2024-07-22T10:11:45.039306,¿Cómo maneja el banco las reclamaciones de los clientes?,"Según el PDF, el banco maneja las reclamaciones de los clientes a través del Defensor del Cliente, que es una instancia independiente para resolver disputas. Además, el plazo máximo de respuesta a reclamaciones es de 15 días hábiles. (Fuente: Normativa del Banco Universal S. A., apartado 4.2)","El banco maneja las reclamaciones a través de un proceso estructurado que incluye recepción, investigación, resolución y seguimiento, con un plazo máximo de respuesta de 15 días hábiles.",CSV_summary,"
+- Columnas: customer_id, ",0.09940159574468085,0.4137930990428062,0.1176470545544984,0.34482758180142686,0.18181818181818182,17.7253897190094
+2024-07-22T18:23:17.505312,¿Cómo maneja el banco las reclamaciones de los clientes?,"Según el PDF, el proceso de atención al cliente y gestión de reclamaciones se describe en la sección 4.2 ""Gestión de Reclamaciones"" como sigue:
+
+* Plazo máximo de respuesta a reclamaciones: 15 días hábiles.
+* Defensor del Cliente: Instancia independiente para resolver disputas.
+
+No hay información disponible sobre la frecuencia o cantidad de reclamaciones en el resumen del CSV, por lo que no puedo proporcionar estadísticas.","El banco maneja las reclamaciones a través de un proceso estructurado que incluye recepción, investigación, resolución y seguimiento, con un plazo máximo de respuesta de 15 días hábiles.",CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.1898329969444678,0.430769226035503,0.2666666620586667,0.430769226035503,0.1111111111111111,8.511685132980347
-2024-07-22T10:11:56.043664,¿Cuáles son las normativas sobre prevención de lavado de dinero que sigue el banco?,"La normativa sobre prevención de lavado de dinero que sigue el Banco Universal S.A. no está explícitamente mencionada en la información proporcionada. Sin embargo, se puede inferir que el banco sigue las normas y regulaciones establecidas para prevenir el lavado de dinero, ya que se menciona la protección de información personal y la prevención de fraudes como parte de su política de seguridad. Además, como miembro del sistema financiero, es probable que el banco esté sujeto a las normas y regulaciones establecidas por las autoridades financieras y de supervisión para prevenir el lavado de dinero.",El banco sigue estrictas normativas de KYC (Know Your Customer) y realiza monitoreo constante de transacciones para prevenir el lavado de dinero.,CSV_summary,"
+- Columnas: customer_id, ",0.07243953962703963,0.27160493400396285,0.08695651759215521,0.19753085992988884,0.1111111111111111,14.673014640808105
+2024-07-22T18:23:29.907718,¿Cuáles son las normativas sobre prevención de lavado de dinero que sigue el banco?,"No hay información específica sobre normativas sobre prevención de lavado de dinero en los documentos proporcionados. Sin embargo, es importante mencionar que como banco, es probable que esté cumpliendo con las normas y regulaciones internacionales y nacionales relacionadas con la prevención del blanqueo de capitales y el financiamiento del terrorismo (PCFTE), incluyendo el Reglamento General de Protección de Datos (RGPD) y las normas de la Organización Internacional de Comisiones de Valores (IOSCO).",El banco sigue estrictas normativas de KYC (Know Your Customer) y realiza monitoreo constante de transacciones para prevenir el lavado de dinero.,CSV_summary,"
 IMPORTANTE: Este es un resumen preciso del archivo CSV 'BankCustomerChurnPrediction.csv'.
 - Total de filas (clientes únicos): 10000
 - Número exacto de clientes únicos: 10000
-- Columnas: customer_id, ",0.06380967731464976,0.22499999625000006,0.11650485112263181,0.22499999625000006,0.07692307692307693,10.999514102935791
+- Columnas: customer_id, ",0.027826682316118935,0.16666666265432112,0.04395604040574839,0.16666666265432112,0.07692307692307693,12.399646997451782

@@ -5,7 +5,8 @@
 import streamlit as st
 import os
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 from src.models.rag_system import RAGSystem, CustomRetriever
 from src.utils.test_runner import run_tests, flatten_dict
 from langchain_community.llms import Ollama
@@ -156,29 +157,29 @@ def main():
             # Visualizaciones de las métricas
             st.subheader("Visualización de Métricas")
 
-            fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(10, 15))
+            # Crear subplots con Plotly
+            fig = make_subplots(rows=3, cols=1, subplot_titles=('BLEU y ROUGE Scores', 'Tiempo de Respuesta', 'Relevancia de la Fuente vs BLEU Score'))
 
             # Gráfico de barras para BLEU y ROUGE scores
-            df[['bleu_score', 'rouge_scores_rouge-1', 'rouge_scores_rouge-2', 'rouge_scores_rouge-l']].plot(kind='bar', ax=ax1)
-            ax1.set_title('BLEU y ROUGE Scores')
-            ax1.set_xlabel('Preguntas')
-            ax1.set_ylabel('Scores')
-            ax1.legend(loc='best')
+            for column in ['bleu_score', 'rouge_scores_rouge-1', 'rouge_scores_rouge-2', 'rouge_scores_rouge-l']:
+                fig.add_trace(go.Bar(x=df.index, y=df[column], name=column), row=1, col=1)
 
-            # Gráfico de líneas para perplexity y response_time
-            ax2.plot(df.index, df['response_time'], label='Response Time')
-            ax2.set_title('Tiempo de Respuesta')
-            ax2.set_xlabel('Preguntas')
-            ax2.set_ylabel('Tiempo (s)')
-            ax2.legend(loc='best')
+            # Gráfico de líneas para response_time
+            fig.add_trace(go.Scatter(x=df.index, y=df['response_time'], mode='lines+markers', name='Response Time'), row=2, col=1)
 
             # Gráfico de dispersión para source_relevance vs bleu_score
-            ax3.scatter(df['source_relevance'], df['bleu_score'])
-            ax3.set_title('Relevancia de la Fuente vs BLEU Score')
-            ax3.set_xlabel('Relevancia de la Fuente')
-            ax3.set_ylabel('BLEU Score')
+            fig.add_trace(go.Scatter(x=df['source_relevance'], y=df['bleu_score'], mode='markers', name='Source Relevance vs BLEU Score'), row=3, col=1)
 
-            st.pyplot(fig)
+            # Actualizar el diseño
+            fig.update_layout(height=900, width=800, title_text="Métricas de Evaluación")
+            fig.update_xaxes(title_text="Preguntas", row=1, col=1)
+            fig.update_xaxes(title_text="Preguntas", row=2, col=1)
+            fig.update_xaxes(title_text="Relevancia de la Fuente", row=3, col=1)
+            fig.update_yaxes(title_text="Scores", row=1, col=1)
+            fig.update_yaxes(title_text="Tiempo (s)", row=2, col=1)
+            fig.update_yaxes(title_text="BLEU Score", row=3, col=1)
+
+            st.plotly_chart(fig)
 
 if __name__ == "__main__":
     main()
