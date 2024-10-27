@@ -8,15 +8,15 @@ import io
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from src.models.rag_system import RAGSystem, CustomRetriever
+from src.model.rag_system import RAGSystem, CustomRetriever
 from src.utils.test_runner import run_tests, flatten_dict
 from langchain_community.llms import Ollama
 from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
-from src.models.rag_system import RAGSystem
+from src.model.rag_system import RAGSystem
 from src.utils.test_runner import run_tests
 from src.utils.document_loader import DocumentLoader
 from src.utils.document_processor import DataProcessor
-from src.models.qa_system import QASystem
+from src.model.qa_system import QASystem
 
 
 class StreamlitRAGSystem(RAGSystem):

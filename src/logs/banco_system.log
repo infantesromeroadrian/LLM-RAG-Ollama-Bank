@@ -1,0 +1,44 @@
+2024-10-27 11:54:22,368 - INFO - Iniciando sistema bancario...
+2024-10-27 11:54:22,368 - INFO - Cargando datos desde data/raw_data/BankCustomerChurnPrediction.csv...
+2024-10-27 11:54:22,368 - ERROR - Archivo no encontrado: data/raw_data/BankCustomerChurnPrediction.csv
+2024-10-27 11:54:22,368 - INFO - Tiempo de ejecución de 'cargar_datos': 0.00 segundos
+2024-10-27 11:54:22,368 - ERROR - Error al inicializar el sistema: Error al cargar los datos
+2024-10-27 11:54:22,368 - ERROR - Error en la ejecución: Error al cargar los datos
+2024-10-27 11:54:50,945 - INFO - Iniciando sistema bancario...
+2024-10-27 11:54:50,945 - INFO - Cargando datos desde ../data/raw_data/BankCustomerChurnPrediction.csv...
+2024-10-27 11:54:50,954 - INFO - Datos cargados exitosamente
+2024-10-27 11:54:50,954 - INFO - Columnas del DataFrame: ['customer_id', 'credit_score', 'country', 'gender', 'age', 'tenure', 'balance', 'products_number', 'credit_card', 'active_member', 'estimated_salary', 'churn']
+2024-10-27 11:54:50,954 - INFO - Tiempo de ejecución de 'cargar_datos': 0.01 segundos
+2024-10-27 11:54:50,954 - INFO - Gestor de clientes inicializado correctamente
+2024-10-27 11:54:50,954 - INFO - Inicializando modelo llama3.2...
+2024-10-27 11:54:54,519 - INFO - Modelo llama3.2 inicializado correctamente
+2024-10-27 11:54:54,519 - INFO - Iniciando carga y procesamiento del documento...
+2024-10-27 11:54:54,596 - INFO - Documento cargado: 10000 registros
+2024-10-27 11:54:54,739 - INFO - Documento dividido en 10000 chunks
+2024-10-27 11:54:56,511 - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2024-10-27 11:57:20,230 - INFO - Base de datos vectorial creada y persistida
+2024-10-27 11:57:20,234 - INFO - Tiempo de ejecución de '_cargar_y_procesar_documento': 145.72 segundos
+2024-10-27 11:57:20,235 - INFO - Sistema RAG inicializado correctamente
+2024-10-27 11:57:20,235 - INFO - Sistema bancario inicializado correctamente
+2024-10-27 11:57:45,748 - INFO - Realizando consulta: - ¿Cuáles son los factores más comunes de deserción?
+2024-10-27 11:57:45,756 - ERROR - Error al realizar la consulta: name 'time' is not defined
+2024-10-27 11:57:45,756 - ERROR - Error en la ejecución: name 'time' is not defined
+2024-10-27 12:08:57,573 - INFO - Iniciando sistema bancario...
+2024-10-27 12:08:57,574 - INFO - Cargando datos desde ../data/raw_data/BankCustomerChurnPrediction.csv...
+2024-10-27 12:08:57,582 - INFO - Datos cargados exitosamente
+2024-10-27 12:08:57,582 - INFO - Columnas del DataFrame: ['customer_id', 'credit_score', 'country', 'gender', 'age', 'tenure', 'balance', 'products_number', 'credit_card', 'active_member', 'estimated_salary', 'churn']
+2024-10-27 12:08:57,582 - INFO - Tiempo de ejecución de 'cargar_datos': 0.01 segundos
+2024-10-27 12:08:57,582 - INFO - Gestor de clientes inicializado correctamente
+2024-10-27 12:08:57,583 - INFO - Inicializando modelo llama3.2...
+2024-10-27 12:09:00,869 - INFO - Modelo llama3.2 inicializado correctamente
+2024-10-27 12:09:00,870 - INFO - Iniciando carga y procesamiento del documento...
+2024-10-27 12:09:00,949 - INFO - Documento cargado: 10000 registros
+2024-10-27 12:09:01,077 - INFO - Documento dividido en 10000 chunks
+2024-10-27 12:09:03,888 - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2024-10-27 12:09:04,005 - INFO - Base de datos vectorial cargada desde disco
+2024-10-27 12:09:04,010 - INFO - Tiempo de ejecución de '_cargar_y_procesar_documento': 3.14 segundos
+2024-10-27 12:09:04,011 - INFO - Sistema RAG inicializado correctamente
+2024-10-27 12:09:04,011 - INFO - Sistema bancario inicializado correctamente
+2024-10-27 12:09:15,505 - INFO - Realizando consulta: - ¿Cuáles son los factores más comunes de deserción?
+2024-10-27 12:09:24,473 - INFO - Consulta completada en 8.97 segundos
+2024-10-27 12:09:24,474 - INFO - Tiempo de ejecución de 'realizar_consulta': 8.97 segundos
