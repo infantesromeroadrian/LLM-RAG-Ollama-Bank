@@ -1,297 +1,219 @@
-# 1. app.py
-
-# app.py
-
 import streamlit as st
-import os
-import io
 import pandas as pd
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
-from src.model.rag_system import RAGSystem, CustomRetriever
-from src.utils.test_runner import run_tests, flatten_dict
-from langchain_community.llms import Ollama
-from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
-from src.model.rag_system import RAGSystem
-from src.utils.test_runner import run_tests
-from src.utils.document_loader import DocumentLoader
-from src.utils.document_processor import DataProcessor
-from src.model.qa_system import QASystem
+import plotly.express as px
+from pathlib import Path
+import logging
+
+from utils.logger_config import setup_logger
+from features.cargador_datos_csv import CargadorDatosCSV
+from features.gestor_clientes import GestorClientes
+from model.sistema_rag import SistemaRAG
+
+# Configurar logging
+setup_logger("bank_app.log")
 
 
-class StreamlitRAGSystem(RAGSystem):
-    def __init__(self, base_dir: str, model_name: str = "llama3", temperature: float = 0.7,
-                 chunk_size: int = 2000, chunk_overlap: int = 500):
-        """
-        Inicializa el sistema RAG para Streamlit.
+class BankApp:
+    def __init__(self):
+        """Inicializa la aplicación bancaria."""
+        self.inicializar_sistema()
 
-        Args:
-            base_dir (str): Directorio base para los archivos del sistema.
-            model_name (str): Nombre del modelo de lenguaje a utilizar.
-            temperature (float): Temperatura para la generación de texto.
-            chunk_size (int): Tamaño de los chunks para dividir documentos.
-            chunk_overlap (int): Superposición entre chunks.
-        """
-        pdf_directory = os.path.join(base_dir, "GuideLines")
-        csv_file = os.path.join(base_dir, "raw_data", "BankCustomerChurnPrediction.csv")
-        super().__init__(pdf_directory, csv_file, base_dir)
+    def inicializar_sistema(self):
+        """Inicializa los componentes del sistema."""
+        try:
+            # Configurar rutas
+            ruta_csv = Path("data/raw_data/BankCustomerChurnPrediction.csv")
+            vector_db = Path("vector_db")
 
-        self.model_name = model_name
-        self.temperature = temperature
-        self.chunk_size = chunk_size
-        self.chunk_overlap = chunk_overlap
-        self.llm = Ollama(model=model_name, temperature=temperature)
-        self.embed_model = FastEmbedEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-        self.qa_system = None
-        self.update_llm()
-        self.run()
+            # Cargar datos
+            self.cargador = CargadorDatosCSV(str(ruta_csv))
+            self.df = self.cargador.cargar_datos()
 
-    def update_llm(self):
-        """Actualiza el modelo de lenguaje con los parámetros actuales."""
-        self.llm = Ollama(model=self.model_name, temperature=self.temperature)
+            if self.df is not None:
+                self.gestor = GestorClientes(self.df)
+                self.rag = SistemaRAG(
+                    ruta_archivo=str(ruta_csv),
+                    persist_directory=str(vector_db)
+                )
+                return True
+            return False
 
-    def update_parameters(self, model_name: str, temperature: float, chunk_size: int, chunk_overlap: int):
-        """
-        Actualiza los parámetros del sistema y reprocesa los documentos.
+        except Exception as e:
+            st.error(f"Error al inicializar el sistema: {str(e)}")
+            logging.error(f"Error de inicialización: {str(e)}")
+            return False
 
-        Args:
-            model_name (str): Nuevo nombre del modelo.
-            temperature (float): Nueva temperatura.
-            chunk_size (int): Nuevo tamaño de chunk.
-            chunk_overlap (int): Nueva superposición de chunks.
-        """
-        self.model_name = model_name
-        self.temperature = temperature
-        self.chunk_size = chunk_size
-        self.chunk_overlap = chunk_overlap
-        self.update_llm()
-        self.run()
+    def mostrar_estadisticas_generales(self):
+        """Muestra estadísticas generales del banco."""
+        st.subheader("📊 Estadísticas Generales")
 
-    def run(self):
-        """
-        Ejecuta el flujo completo del sistema RAG.
-        """
-        # Cargar documentos
-        pdf_docs = DocumentLoader.load_pdfs(self.pdf_directory)
-        df = DocumentLoader.load_csv(self.csv_file)
+        col1, col2, col3 = st.columns(3)
 
-        # Procesar documentos
-        split_docs = DataProcessor.split_documents(pdf_docs, self.chunk_size, self.chunk_overlap)
-        csv_summary_doc = DataProcessor.create_csv_summary(df)
-        csv_docs = DataProcessor.create_csv_docs(df)
+        with col1:
+            total_clientes = len(self.df)
+            st.metric("Total Clientes", f"{total_clientes:,}")
 
-        # Combinar todos los documentos procesados
-        all_docs = [csv_summary_doc] + csv_docs + split_docs
+        with col2:
+            churn_rate = (self.df['churn'].mean() * 100)
+            st.metric("Tasa de Deserción", f"{churn_rate:.1f}%")
 
-        # Crear vector store
-        vector_store = self.vector_store_manager.create_vector_store(all_docs)
-        print(f"Vector store created with {vector_store._collection.count()} documents")
+        with col3:
+            balance_promedio = self.df['balance'].mean()
+            st.metric("Balance Promedio", f"${balance_promedio:,.2f}")
 
-        # Configurar el recuperador personalizado
-        custom_retriever = CustomRetriever(vectorstore=vector_store)
+        # Gráficos
+        col1, col2 = st.columns(2)
 
-        # Configurar el sistema QA
-        self.qa_system = QASystem(self.llm, custom_retriever)
-        self.qa_system.setup_qa_chain()
-        print("QA system set up successfully")
+        with col1:
+            # Distribución de Credit Score
+            fig_score = px.histogram(
+                self.df,
+                x='credit_score',
+                title='Distribución de Credit Score',
+                color='churn',
+                barmode='group'
+            )
+            st.plotly_chart(fig_score, use_container_width=True)
 
-    def ask_question(self, question: str):
-        """
-        Realiza una pregunta al sistema RAG.
+        with col2:
+            # Deserción por país
+            churn_by_country = self.df.groupby('country')['churn'].mean().reset_index()
+            fig_country = px.bar(
+                churn_by_country,
+                x='country',
+                y='churn',
+                title='Tasa de Deserción por País',
+                labels={'churn': 'Tasa de Deserción'}
+            )
+            st.plotly_chart(fig_country, use_container_width=True)
 
-        Args:
-            question (str): La pregunta a responder.
+    def analizar_cliente(self, customer_id):
+        """Analiza un cliente específico."""
+        try:
+            stats = self.gestor.obtener_estadisticas_cliente(customer_id)
+            if stats:
+                col1, col2 = st.columns(2)
 
-        Returns:
-            dict: Un diccionario que contiene la respuesta y los documentos fuente.
+                with col1:
+                    st.subheader("🔍 Información del Cliente")
+                    for key, value in stats.items():
+                        if key == 'risk_level':
+                            color = {
+                                'BAJO': 'green',
+                                'MEDIO': 'orange',
+                                'ALTO': 'red'
+                            }.get(value, 'black')
+                            st.markdown(f"**Nivel de Riesgo:** :{color}[{value}]")
+                        else:
+                            st.write(f"**{key.replace('_', ' ').title()}:** {value}")
 
-        Raises:
-            ValueError: Si el sistema QA no ha sido configurado previamente.
-        """
-        if not self.qa_system:
-            raise ValueError("QA system not set up. Run the 'run' method first.")
-        return self.qa_system.ask_question(question)
+                with col2:
+                    cliente_data = self.df[self.df['customer_id'] == customer_id]
+                    if not cliente_data.empty:
+                        # Comparar con promedios
+                        st.subheader("📈 Comparativa con Promedios")
+                        metrics = ['credit_score', 'balance', 'products_number']
 
+                        for metric in metrics:
+                            avg_value = self.df[metric].mean()
+                            client_value = cliente_data[metric].iloc[0]
+                            delta = ((client_value - avg_value) / avg_value) * 100
 
-@st.cache_resource
-def load_rag_system(base_dir, model_name, temperature, chunk_size, chunk_overlap):
-    """
-    Carga y configura el sistema RAG, utilizando caché de Streamlit para mejorar el rendimiento.
+                            st.metric(
+                                metric.replace('_', ' ').title(),
+                                f"{client_value:,.2f}",
+                                f"{delta:+.1f}% vs promedio"
+                            )
+            else:
+                st.warning("No se encontró información para este cliente")
 
-    Returns:
-        StreamlitRAGSystem: Instancia configurada del sistema RAG.
-    """
-    try:
-        rag_system = StreamlitRAGSystem(base_dir=base_dir, model_name=model_name,
-                                        temperature=temperature, chunk_size=chunk_size,
-                                        chunk_overlap=chunk_overlap)
-        return rag_system
-    except Exception as e:
-        st.error(f"Error al cargar el sistema RAG: {str(e)}")
-        return None
+        except Exception as e:
+            st.error(f"Error al analizar cliente: {str(e)}")
+            logging.error(f"Error en análisis de cliente: {str(e)}")
 
+    def realizar_consulta_rag(self, consulta):
+        """Realiza una consulta al sistema RAG."""
+        try:
+            with st.spinner('Analizando datos...'):
+                resultado = self.rag.realizar_consulta(consulta)
 
-def get_response(rag_system, question):
-    """
-    Obtiene la respuesta a una pregunta utilizando el sistema RAG.
+                st.subheader("🤖 Respuesta del Sistema")
+                st.write(resultado['respuesta'])
 
-    Args:
-        rag_system (StreamlitRAGSystem): Instancia del sistema RAG.
-        question (str): Pregunta a realizar.
-    """
-    if rag_system is None:
-        st.error("El sistema RAG no está disponible debido a un error de configuración.")
-        return
+                with st.expander("Ver detalles del análisis"):
+                    st.write("**Metadatos:**")
+                    st.write(f"- Documentos analizados: {resultado['metadatos']['num_documentos']}")
+                    st.write(f"- Tiempo de respuesta: {resultado['metadatos']['tiempo_respuesta']:.2f} segundos")
+                    st.write(f"- Modelo utilizado: {resultado['metadatos']['modelo']}")
 
-    if question:
-        with st.spinner('Buscando la respuesta...'):
-            try:
-                response = rag_system.ask_question(question)
-                st.write("Respuesta:")
-                st.write(response["result"])
-                st.write("\nFuente principal:")
-                source = response['source_documents'][0].metadata.get('source', 'No especificada')
-                st.write(f"Fuente: {source}")
-                st.write(response['source_documents'][0].page_content[:200])  # Primeros 200 caracteres
-            except Exception as e:
-                st.error(f"Error al procesar la pregunta: {str(e)}")
-                st.error(
-                    "Si el error persiste, intente actualizar o reinstalar el modelo usando 'ollama pull [nombre_del_modelo]'")
-    else:
-        st.warning("Por favor, ingrese una pregunta.")
+                    st.write("\n**Documentos fuente utilizados:**")
+                    for i, doc in enumerate(resultado['documentos_fuente'], 1):
+                        st.text(f"Documento {i}:\n{doc}\n")
+
+        except Exception as e:
+            st.error(f"Error en la consulta: {str(e)}")
+            logging.error(f"Error en consulta RAG: {str(e)}")
 
 
 def main():
-    """Función principal que configura y ejecuta la interfaz de Streamlit."""
-    st.title("Sistema de Consultas Bancarias RAG Configurable")
-
-    base_dir = "../data"
-
-    # Configuración de la barra lateral
-    st.sidebar.header("Configuración del Sistema")
-    model_name = st.sidebar.selectbox("Modelo", ["llama3", "llama2", "mistral"], index=0)
-    temperature = st.sidebar.slider("Temperatura", min_value=0.0, max_value=1.0, value=0.7, step=0.1)
-    chunk_size = st.sidebar.number_input("Tamaño de Chunk", min_value=500, max_value=5000, value=2000, step=100)
-    chunk_overlap = st.sidebar.number_input("Superposición de Chunk", min_value=0, max_value=1000, value=500, step=50)
-
-    # Verificamos si algún parámetro ha cambiado
-    params_changed = (
-            "model_name" not in st.session_state or
-            st.session_state.model_name != model_name or
-            st.session_state.temperature != temperature or
-            st.session_state.chunk_size != chunk_size or
-            st.session_state.chunk_overlap != chunk_overlap
+    st.set_page_config(
+        page_title="Sistema Bancario Inteligente",
+        page_icon="🏦",
+        layout="wide"
     )
 
-    # Actualizamos el estado de la sesión y recargar el sistema RAG si es necesario
-    if params_changed:
-        st.session_state.model_name = model_name
-        st.session_state.temperature = temperature
-        st.session_state.chunk_size = chunk_size
-        st.session_state.chunk_overlap = chunk_overlap
+    st.title("🏦 Sistema Bancario Inteligente")
 
-        with st.spinner("Actualizando configuración y reprocesando documentos..."):
-            rag_system = load_rag_system(base_dir, model_name, temperature, chunk_size, chunk_overlap)
+    # Inicializar aplicación
+    if 'app' not in st.session_state:
+        st.session_state.app = BankApp()
 
-        if rag_system:
-            st.success("Configuración actualizada y documentos reprocesados")
-            # Obtener una respuesta automáticamente después de la actualización
-            if 'last_question' in st.session_state and st.session_state.last_question:
-                get_response(rag_system, st.session_state.last_question)
-    else:
-        rag_system = load_rag_system(base_dir, model_name, temperature, chunk_size, chunk_overlap)
+    # Menú lateral
+    st.sidebar.title("Navegación")
+    opciones = [
+        "Dashboard General",
+        "Análisis de Cliente",
+        "Consultas Inteligentes"
+    ]
+    seleccion = st.sidebar.radio("Seleccione una opción:", opciones)
 
-    if rag_system:
-        st.write(
-            "Este sistema utiliza RAG (Retrieval-Augmented Generation) para responder preguntas sobre datos bancarios y normativas.")
+    if seleccion == "Dashboard General":
+        st.session_state.app.mostrar_estadisticas_generales()
 
-        # Área de preguntas y respuestas
-        user_question = st.text_input("Ingrese su pregunta aquí:")
+    elif seleccion == "Análisis de Cliente":
+        st.subheader("🔍 Análisis de Cliente")
+        customer_id = st.number_input(
+            "Ingrese ID del cliente:",
+            min_value=0,
+            step=1
+        )
+        if st.button("Analizar Cliente"):
+            st.session_state.app.analizar_cliente(customer_id)
 
-        if st.button("Obtener Respuesta") or (
-                user_question and user_question != st.session_state.get('last_question', '')):
-            st.session_state.last_question = user_question
-            get_response(rag_system, user_question)
+    else:  # Consultas Inteligentes
+        st.subheader("💡 Consultas Inteligentes")
 
-        # Ejemplos de preguntas
-        st.write("\nEjemplos de preguntas que puedes hacer:")
-        example_questions = [
-            "¿Cuántos clientes únicos tenemos en el banco según nuestra data en el CSV?",
-            "¿Cuál es el saldo promedio de los clientes?",
-            "¿Cuántos países están representados en nuestros datos de clientes?",
-            "¿Cuál es la tasa de abandono de clientes?",
-            "¿Cuál es el rango de edades de nuestros clientes?",
-            "¿Qué porcentaje de clientes tiene tarjeta de crédito?",
-            "¿Cuáles son los requisitos para abrir una cuenta bancaria?",
-            "¿Qué medidas de seguridad se aplican para proteger las transacciones en línea?",
-            "¿Cuál es la política del banco respecto a los préstamos hipotecarios?",
-            "¿Cómo maneja el banco las reclamaciones de los clientes?",
-            "¿Cuáles son las normativas sobre prevención de lavado de dinero que sigue el banco?"
+        # Ejemplos de consultas
+        st.write("**Ejemplos de consultas:**")
+        ejemplos = [
+            "¿Cuáles son los factores más comunes de deserción?",
+            "¿Cómo influye el credit score en la deserción?",
+            "¿Qué relación hay entre el balance y la retención?",
+            "¿Los clientes activos tienen menor tasa de deserción?"
         ]
-        for question in example_questions:
-            if st.button(question):
-                st.session_state.last_question = question
-                get_response(rag_system, question)
+        for ejemplo in ejemplos:
+            if st.button(ejemplo):
+                st.session_state.app.realizar_consulta_rag(ejemplo)
 
-        # Ejecución de pruebas y visualización de resultados
-        if st.button("Ejecutar Pruebas"):
-            with st.spinner('Ejecutando pruebas...'):
-                reference_answers = [
-                    "Según los datos del CSV, tenemos 10000 clientes únicos en el banco.",
-                    "El saldo promedio de los clientes es 76,485.89 euros.",
-                    "En nuestros datos de clientes están representados 3 países: Francia, España y Alemania.",
-                    "La tasa de abandono de clientes es del 20.37%.",
-                    "El rango de edades de nuestros clientes es de 18 a 92 años.",
-                    "El 70.51% de los clientes tiene tarjeta de crédito.",
-                    "Para abrir una cuenta bancaria, generalmente se requiere una identificación válida, comprobante de domicilio y un depósito inicial mínimo.",
-                    "El banco utiliza encriptación de extremo a extremo, autenticación de dos factores y monitoreo constante para proteger las transacciones en línea.",
-                    "La política de préstamos hipotecarios del banco incluye evaluación de crédito, tasas de interés competitivas y plazos flexibles de hasta 30 años.",
-                    "El banco maneja las reclamaciones a través de un proceso estructurado que incluye recepción, investigación, resolución y seguimiento, con un plazo máximo de respuesta de 15 días hábiles.",
-                    "El banco sigue estrictas normativas de KYC (Know Your Customer) y realiza monitoreo constante de transacciones para prevenir el lavado de dinero."
-                ]
-                results = run_tests(rag_system, example_questions, reference_answers, 'resultados_pruebas.csv')
-            st.success("Pruebas completadas. Resultados guardados en 'resultados_pruebas.csv'")
+        # Consulta personalizada
+        st.write("\n**O realice su propia consulta:**")
+        consulta = st.text_area("Escriba su consulta:")
+        if st.button("Realizar Consulta"):
+            if consulta:
+                st.session_state.app.realizar_consulta_rag(consulta)
+            else:
+                st.warning("Por favor, ingrese una consulta")
 
-            # Mostrar los resultados en la interfaz
-            if os.path.exists('resultados_pruebas.csv'):
-                df = pd.read_csv('resultados_pruebas.csv')
-                st.dataframe(df)
-
-                # Visualizaciones de las métricas
-                st.subheader("Visualización de Métricas")
-
-                # Crear subplots con Plotly
-                fig = make_subplots(rows=3, cols=1, subplot_titles=(
-                'BLEU y ROUGE Scores', 'Tiempo de Respuesta', 'Relevancia de la Fuente vs BLEU Score'))
-
-                # Gráfico de barras para BLEU y ROUGE scores
-                for column in ['bleu_score', 'rouge_scores_rouge-1', 'rouge_scores_rouge-2', 'rouge_scores_rouge-l']:
-                    fig.add_trace(go.Bar(x=df.index, y=df[column], name=column), row=1, col=1)
-
-                # Gráfico de líneas para response_time
-                fig.add_trace(go.Scatter(x=df.index, y=df['response_time'], mode='lines+markers', name='Response Time'),
-                              row=2, col=1)
-
-                # Gráfico de dispersión para source_relevance vs bleu_score
-                fig.add_trace(go.Scatter(x=df['source_relevance'], y=df['bleu_score'], mode='markers',
-                                         name='Source Relevance vs BLEU Score'), row=3, col=1)
-
-                # Actualizar el diseño
-                fig.update_layout(height=900, width=800, title_text="Métricas de Evaluación")
-                fig.update_xaxes(title_text="Preguntas", row=1, col=1)
-                fig.update_xaxes(title_text="Preguntas", row=2, col=1)
-                fig.update_xaxes(title_text="Relevancia de la Fuente", row=3, col=1)
-                fig.update_yaxes(title_text="Scores", row=1, col=1)
-                fig.update_yaxes(title_text="Tiempo (s)", row=2, col=1)
-                fig.update_yaxes(title_text="BLEU Score", row=3, col=1)
-
-                # Mostrar el gráfico
-                st.plotly_chart(fig)
-
-    else:
-        st.error("El sistema RAG no está disponible debido a un error de configuración.")
-        st.warning("Por favor, verifique la configuración y vuelva a intentarlo.")
-        st.stop()
 
 if __name__ == "__main__":
     main()
